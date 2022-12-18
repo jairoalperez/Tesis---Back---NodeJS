@@ -15,14 +15,18 @@ const crearusuario= async(req,res)=>{
 const  { 
      correo,                           
      clave,
-     verificarclave
+     verificarclave,
+     nombre,
+     apellido,
+     cargo,
+     departamento
       }= req.body;
       
       if(clave===verificarclave){
 
      const passwordencriptado = await helpers.encryptPassword(clave)
-      const result= await pool.query('INSERT INTO usuario(correo,clave) VALUES($1,$2)', [
-      correo,passwordencriptado ])
+      const result= await pool.query('INSERT INTO usuario(correo,clave,nombre,apellido,cargo,departamento) VALUES($1,$2,$3,$4,$5,$6)', [
+      correo,passwordencriptado,nombre,apellido,cargo,departamento ])
       console.log(result)
       res.json(result.rows)
 
@@ -32,8 +36,16 @@ const  {
     }
 
 
+    const buscaruser = async (req, res) => {
+      const correo = req.params.correo
+      const response = await pool.query('SELECT* FROM usuario WHERE  correo=$1', [correo])
+      console.log(response);
+      res.json(response.rows)
+    }
+
+
     module.exports={
-         crearusuario
+         crearusuario, buscaruser
         
         
      }

@@ -10,6 +10,7 @@ router.post('/login', passportAuth)
 router.get('/perfil',(req,res)=>{
     res.send('perfil')
 })
+router.get('/buscar-userc/:correo',usuario.buscaruser)
 
 
 
