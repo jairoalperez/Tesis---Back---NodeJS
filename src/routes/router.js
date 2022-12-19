@@ -1,7 +1,8 @@
 const express= require('express')
 const router = express.Router()
-const usuario = require('../controllers/usuario')
 const  {passportAuth}  = require('../middlewares')
+const usuario = require('../controllers/usuario')
+const inventario = require('../controllers/inventario')
 
 
 //registro y login
@@ -11,6 +12,11 @@ router.get('/perfil',(req,res)=>{
     res.send('perfil')
 })
 router.get('/buscar-userc/:correo',usuario.buscaruser)
+
+
+
+// inventario
+router.get('/inventario', inventario.buscar)
 
 
 

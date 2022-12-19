@@ -4,7 +4,12 @@ const session=require('express-session')
 const app = express()
 const {Strategy} =require('passport-local')
 const { LocalStrategy } = require('./strategies')
+const fs = require('fs')
 const cors = require('cors')
+const {content} = require('./pdf/pdfContent')
+const fonts = require('./pdf/fonts')
+const styles = require('./pdf/styles')
+const PdfPrinter = require('pdfmake')
 
 
 //middlewares
@@ -34,8 +39,6 @@ app.use(passport.initialize())
 app.use(passport.session());
 //router
 app.use(require('./routes/router'));
-
-//process.env.PORT ||
 
 
 //servidor activo
