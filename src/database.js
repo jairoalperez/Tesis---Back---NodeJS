@@ -79,7 +79,7 @@ const buscarinvobj = async (req, res) => {
 const editinv = async (req, res) => {
   const id = req.params.id
   const cantidad = req.params.cantidad
-  const response = await pool.query('UPDATE inventario SET cantidad = $2 WHERE id_inventario = $1', [id, cantidad])
+  const response = await pool.query('UPDATE inventario SET cantidad = $2 WHERE nombre = $1', [id, cantidad])
   console.log(response);
   res.json(response.rowCount)
 }
